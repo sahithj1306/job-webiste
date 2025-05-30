@@ -8,12 +8,13 @@ app = FastAPI()
 @app.get("/search")
 async def search_jobs(
     query: str = Query(..., description="Job title or keywords"),
-    location: Optional[str] = None
+    location: Optional[str] = None,
+    experience: Optional[int] = Query(None, description="Years of experience required")
 ):
     jobs = []
     jobs += adzuna.search(query, location)
     jobs += remotive.search(query, location)
-    jobs += naukri.search(query, location)
+    jobs += naukri.search(query, location, experience)
     jobs += foundit.search(query, location)
     jobs = merge_jobs(jobs)
     return {"results": jobs} 

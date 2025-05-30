@@ -1,70 +1,78 @@
-# Job Aggregator API
+# Job Website
 
-A FastAPI-based job search aggregator that combines job listings from multiple sources including Adzuna, Remotive, Naukri, and Foundit.
+A full-stack job search platform with a modern frontend, middleware for authentication and API management, and a robust backend for job aggregation.
+
+## Project Structure
+
+```
+my-website/
+│
+├── frontend/         # React frontend application
+│   ├── public/       # Static files
+│   ├── src/         # React source code
+│   └── package.json # Frontend dependencies
+│
+├── middleware/       # Express middle-tier APIs
+│   ├── src/         # Middleware source code
+│   ├── package.json # Middleware dependencies
+│   └── .env         # Middleware environment variables
+│
+├── backend/         # Python FastAPI backend
+│   ├── src/        # Backend source code
+│   ├── database/   # Database models and migrations
+│   ├── migrations/ # Database migration files
+│   ├── requirements.txt # Python dependencies
+│   └── .env        # Backend environment variables
+```
+
+## Setup Instructions
+
+### Frontend Setup
+```bash
+cd frontend
+npm install
+npm start
+```
+
+### Middleware Setup
+```bash
+cd middleware
+npm install
+npm run dev
+```
+
+### Backend Setup
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn src.app.main:app --reload
+```
 
 ## Features
 
-- Search jobs across multiple platforms simultaneously
-- Filter by location and experience
-- Deduplicated results
-- RESTful API interface
-
-## Setup
-
-1. Clone the repository:
-```bash
-git clone https://github.com/sahithj1306/job-website.git
-cd job-website
-```
-
-2. Create and activate a virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-4. Run the application:
-```bash
-uvicorn app.main:app --reload
-```
-
-The API will be available at `http://localhost:8000`
-
-## API Endpoints
-
-### GET /search
-
-Search for jobs across multiple platforms.
-
-Query Parameters:
-- `query` (required): Job title or keywords
-- `location` (optional): Location to search in
-- `experience` (optional): Years of experience required
-
-Example:
-```
-GET /search?query=python&location=remote&experience=2
-```
-
-## Supported Job Platforms
-
-- Adzuna
-- Remotive
-- Naukri
-- Foundit
+- Modern React frontend with responsive design
+- Express middleware for authentication and API management
+- FastAPI backend for job aggregation
+- Support for multiple job platforms:
+  - Adzuna
+  - Remotive
+  - Naukri
+  - Foundit
+- User authentication and authorization
+- Job search with filters
+- Job application tracking
 
 ## Development
 
-To add a new job platform:
-1. Create a new service file in `app/services/`
-2. Implement the search function
-3. Add the service to the imports in `main.py`
-4. Add the service to the search endpoint
+### Adding New Features
+1. Frontend: Add new components in `frontend/src/components`
+2. Middleware: Add new routes in `middleware/src/routes`
+3. Backend: Add new services in `backend/src/app/services`
+
+### Environment Variables
+Create `.env` files in both middleware and backend directories with appropriate configuration.
 
 ## License
 

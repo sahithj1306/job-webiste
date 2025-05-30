@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const jobsRouter = require('./routes/jobs');
 
 // Load environment variables
 dotenv.config();
@@ -15,6 +16,8 @@ app.use(express.json());
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
+
+app.use('/api/jobs', jobsRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
